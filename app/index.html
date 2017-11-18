@@ -14,11 +14,14 @@
     </head>
     <body class="landing">
         <nav class="navbar">
-            <a href="index.html" class="logo">
+           <!--Aliyar: Im not sure if this is the correct why of using ui-sref. Why should we use this directive here? 
+                is this a rule for AngularJS or it brings down our loading time? -->
+           
+            <a ui-sref="index" class="logo">
                 <img src="assets/images/bloc_jams_logo.png" alt="bloc jams logo">
             </a>
             <div class="links-container">
-                <a href="collection.html" class="navbar-link">Collection</a>
+                <a ui-sref="collection" class="navbar-link">Collection</a>
             </div>
         </nav>
         <ui-view></ui-view>
