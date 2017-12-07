@@ -6,26 +6,29 @@
 </head>
 
 <body>
- <main class="album-view container narrow">
+<!--Future Ref: it's referring to an `ng-repeat`, I believe, which is effectively a `forEach` loop, but in an HTML template instead of JS. It iterates through the `collection.albums` array, giving you access to each array item one at a time (as `album`)-->
+   
+<!--Future Ref: If you think of an array in this case of many items of the same type(album) then when we only want to use information from one item we use album. Albums.property does not exist because it is an array.-->
+              <main class="album-view container narrow">
      <section class="clearfix">
          <div class="column half">
-             <img src="/assets/images/album_covers/01.png" class="album-cover-art">
+             <img src="{{album.albumArtUrl}}" class="album-cover-art">
          </div>
          <div class="album-view-details column half">
-             <h2 class="album-view-title">The Colors</h2>
-             <h3 class="album-view-artist">Pablo Picasso</h3>
-             <h5 class="album-view-release-info">1909 Spanish Records</h5>
+             <h2 class="album-view-title">{{album.albumData.title}}</h2>
+             <h3 class="album-view-artist">{{album.albumData.artist}}</h3>
+             <h5 class="album-view-release-info">{{album.albumData.year}} &nbsp; {{album.albumData.label}}</h5>
          </div>
      </section>
      <table class="album-view-song-list">
-        <tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false"> 
+        <tr class="album-view-song-item" ng-repeat= "song in album.albumData.songs" ng-mouseover="hovered = true" ng-mouseleave="hovered = false"> 
 <td class="song-item-number" ng-mouseover="hovered = true" ng-mouseleave="hovered = false"> 
      <span ng-show="!playing && !hovered">1</span>
      <a class="album-song-button" ng-show="!playing && hovered"><span class="ion-play"></span></a>
      <a class="album-song-button" ng-show="playing"><span class="ion-pause"></span></a>
 </td>
-             <td class="song-item-title">Blue</td>
-             <td class="song-item-duration">3:31</td>
+             <td class="song-item-title">{{song.title}}</td>
+             <td class="song-item-duration">{{song.duration}}</td>
          </tr>
      </table>
  </main>
