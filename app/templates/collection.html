@@ -7,8 +7,7 @@
 
 <body>
 <section class="album-covers container clearfix">
-     <div class="collection-album-container column fourth" ng-repeat="album in collection.albums">
- ...
+      <div class="collection-album-container column fourth" ng-repeat="album in collection.albums track by $index">
          <img src="{{ album.albumArtUrl }}">
          <div class="collection-album-info caption">
              <p>
@@ -22,6 +21,6 @@
          </div>
      </div>
  </section>
-<ng-include src="'/templates/player_bar.html'"></ng-include>
+<ng-include src="'/templates/playerbar.html'"></ng-include>
 </body>
 </html>
