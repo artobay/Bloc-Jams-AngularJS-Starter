@@ -1,55 +1,53 @@
-(function(){
-  function SongPlayer() {
-    var SongPlayer = {};
-    var currentSong = null;
-
-    /**
-    *@desc Buzz object audio file
-    *@type {Object}
-    */
-    var currentBuzzObject = null;
-
-    /**
-    *@function setSong
-    *@desc Stops currently playing song and loads new audio file as
-    *currentBuzzObject.
-    *@param {Object} song
-    */
-    var setSong = function(song) {
-      if(currentBuzzObject) {
-        currentBuzzObject.stop();
-        currentSong.playing = null;
-      }
-
-      currentBuzzObject = new buzz.sound(song.audioUrl, {
-        formats: ['mp3'],
-        preload: true
-      });
-
-      currentSong = song;
-    };
-
-    SongPlayer.play = function(song) {
-      if(currentSong !== song) {
-        setSong(song);
-        currentBuzzObject.play();
-        song.playing = true;
-      } else if (currentSong === song) {
-        if(currentBuzzObject.isPaused()) {
-          currentBuzzObject.play();
+ (function() {
+     function Fixtures() {
+         var Fixtures = {};
+		 
+		 var albumPicasso = {
+         title: 'The Colors',
+         artist: 'Pablo Picasso',
+         label: 'Cubism',
+         year: '1881',
+         albumArtUrl: '/assets/images/album_covers/01.png',
+         songs: [
+             { title: 'Blue', duration: '161.71', audioUrl: '/assets/music/blue' },
+             { title: 'Green', duration: '103.96', audioUrl: '/assets/music/green' },
+             { title: 'Red', duration: '268.45', audioUrl: '/assets/music/red' },
+             { title: 'Pink', duration: '153.14', audioUrl: '/assets/music/pink' },
+             { title: 'Magenta', duration: '374.22', audioUrl: '/assets/music/magenta' }
+         ]
+     };
+ 
+     var albumMarconi = {
+         title: 'The Telephone',
+         artist: 'Guglielmo Marconi',
+         label: 'EM',
+         year: '1909',
+         albumArtUrl: '/assets/images/album_covers/20.png',
+         songs: [
+             { title: 'Hello, Operator?', duration: '1:01' },
+             { title: 'Ring, ring, ring', duration: '5:01' },
+             { title: 'Fits in your pocket', duration: '3:21' },
+             { title: 'Can you hear me now?', duration: '3:14' },
+             { title: 'Wrong phone number', duration: '2:15' }
+         ]
+     };
+         
+		 Fixtures.getAlbum = function() {
+         return albumPicasso;
+     };
+		 
+		Fixtures.getCollection = function(numberOfAlbums) {
+        var album1 = [];
+        for(var i=0; i<numberOfAlbums; i++){
+        album1.push(angular.copy(albumPicasso));
         }
-      }
-    };
-
-    SongPlayer.pause = function(song) {
-      currentBuzzObject.pause();
-      song.playing = false;
-    };
-
-    return SongPlayer;
-  }
-
-  angular
-    .module('blocJams')
-    .factory('SongPlayer', SongPlayer);
-})();
+       return album1;
+      };
+		 
+		 return Fixtures;
+     }
+ 
+     angular
+         .module('blocJams')
+         .factory('Fixtures', Fixtures);
+ })();
