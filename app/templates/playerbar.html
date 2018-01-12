@@ -1,4 +1,4 @@
-<section class="player-bar" ng-controller="PlayerBarCtrl as playerBar">
+<section class="player-bar" ng-controller="PlayerBarCtrl as playerBar" xmlns="">
      <div class="container">
          <div class="control-group main-controls">
               <a class="previous" ng-click="playerBar.songPlayer.previous()">
@@ -27,16 +27,21 @@
 						  max="{{ playerBar.songPlayer.currentSong.duration }}" 
 						  on-change="playerBar.songPlayer.setCurrentTime(value)">
 				</seek-bar>
-                 <div class="current-time"></div>
+                 <div class="current-time">{{ playerBar.songPlayer.currentTime }}</div>
                  <div class="total-time">{{playerBar.songPlayer.currentSong.duration}}</div>
              </div>
          </div>
-         <div class="control-group volume">
+         
+		 <div class="control-group volume">
              <span class="icon ion-volume-high"></span>
               
-            <seek-bar></seek-bar> 
+            <seek-bar value="{{ playerBar.songPlayer.volume }}"
+					  max="100">
+					  on-change="playerBar.songPlayer.setVolume(value)">
+					  </seek-bar> 
          </div>
-     </div>
+     
+	 </div>
  </section>
 </body>
 </html>

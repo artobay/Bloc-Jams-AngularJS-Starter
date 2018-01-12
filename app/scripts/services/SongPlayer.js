@@ -3,7 +3,7 @@
  * @desc Current playback time (in seconds) of currently playing song
  * @type {Number}
  */
-    var SongPlayer = {};
+    
 
     /**
     *@desc currentAlbum object stores album info
@@ -45,6 +45,19 @@
         preload: true
       });
 
+     
+      currentBuzzObject.bind('timeupdate', function() {
+        $rootScope.$apply(function() {
+          SongPlayer.currentTime = currentBuzzObject.getTime();
+        });
+      });
+
+      currentBuzzObject.bind('volumechange', function() {
+        $rootScope.$apply(function() {
+          SongPlayer.volume = currentBuzzObject.getVolume();
+        });
+      });
+
       SongPlayer.currentSong = song;
     };
 
@@ -79,7 +92,9 @@
      * @type {Number}
      */
  SongPlayer.currentTime = null;
-    /**
+ SongPlayer.volume = null; 
+//------------------------------------------------------------
+     /**
     *@function SongPlayer.play
     *@desc Plays selected song or paused song
     *@param {Object} song
@@ -95,7 +110,7 @@
         }
       }
     };
-
+//--------------------------------------------------------
     /**
     *@function SongPlayer.pause
     *@desc Pauses selected song if playing and sets playing property to false
@@ -106,7 +121,7 @@
       currentBuzzObject.pause();
       song.playing = false;
     };
-
+//--------------------------------------------------------------
     /**
     *@function SongPlayer.previous
     *@desc Plays previous song in songs list
@@ -123,7 +138,7 @@
         playSong(song);
       }
     };
-
+//--------------------------------------------------------------
 	 /**
     *@function SongPlayer.previous
     *@desc Plays next song in songs list
@@ -140,12 +155,21 @@
         playSong(newSong);
       }
     };
-	
-     SongPlayer.setCurrentTime = function(time) {
-     if (currentBuzzObject) {
-         currentBuzzObject.setTime(time);
+//-------------------------------------------------------------
+        SongPlayer.setCurrentTime = function(time) {
+           if (currentBuzzObject) {
+            currentBuzzObject.setTime(time);
      }
  };
+	
+//----------------------------------------------------------	
+		
+		SongPlayer.setVolume = function(volume) {
+			if (currentBuzzObject) {
+				currentBuzzObject.setVolume(volume);
+	  }
+};
+	
 	
     return SongPlayer;
   }
