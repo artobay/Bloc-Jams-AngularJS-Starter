@@ -50,7 +50,7 @@
 			 scope.thumbStyle = function () {
 
 
-				 return {width: percentString()};
+				 return {left: percentString()};
 			 };
 
 
